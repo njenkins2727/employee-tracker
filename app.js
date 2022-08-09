@@ -1,6 +1,6 @@
 const inquirer = require('inquirer');
 const { getDepartments, addDepartment } = require('./operations/departments');
-
+const { getRoles, addRoles } = require('./operations/roles');
 function main(){
     
 return inquirer.prompt([
@@ -24,23 +24,31 @@ return inquirer.prompt([
         type: 'input',
         name: "department_name",
         when: (ans) => ans.operations === 'Add a department',
+    },
+    {
+        message: "what is the role name?",
+        type: 'input',
+        name: "role_name",
+        when: (ans) => ans.operations === 'Add a role',
     }
 ]).then (async (ans) => {
     switch(ans.operations){
 
-        case "view all departments":
-            const departments = await getDepartments();
-            console.table(departments);
+        case "View all departments":
+            const viewDepartments = await getDepartments();
+            console.table(viewDepartments);
         break;
 
         case "View all roles":
+            const viewRoles = await getRoles();
+            console.table(viewRoles);
             break;
 
         case "View all employees":
             break;   
             
         case "Add a department":
-            const department = await addDepartment(ans.department_name);
+            const addDepartment = await addDepartment(ans.department_name);
             break;
 
         case "Add a role":

@@ -12,7 +12,7 @@ async function getDepartments(){
 
 const db = await connect();
 
-  const [departments] = await db.query('SELECT * FROM departments');
+  const [departments] = await db.query('SELECT * FROM departments'); //extracts out the rows 
 
   return departments;
 }
