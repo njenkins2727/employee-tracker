@@ -25,12 +25,12 @@ return inquirer.prompt([
         name: "department_name",
         when: (ans) => ans.operations === 'Add a department',
     },
-    {
-        message: "what is the role name?",
-        type: 'input',
-        name: "role_name",
-        when: (ans) => ans.operations === 'Add a role',
-    }
+    // {
+    //     message: "what is the role name?",
+    //     type: 'input',
+    //     name: "role_name",
+    //     when: (ans) => ans.operations === 'Add a role',
+    // }
 ]).then (async (ans) => {
     switch(ans.operations){
 
@@ -40,7 +40,7 @@ return inquirer.prompt([
         break;
 
         case "View all roles":
-            const viewRoles = await getRoles();
+            const viewRoles = await getRoles(ans.roles_name);
             console.table(viewRoles);
             break;
 
@@ -49,6 +49,7 @@ return inquirer.prompt([
             
         case "Add a department":
             const addDepartment = await addDepartment(ans.department_name);
+            console.table(addDepartment)
             break;
 
         case "Add a role":
